@@ -23,25 +23,6 @@ jobs:
           java-version: '21'
           distribution: 'adopt'
           # gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Value of the GPG private key to import
-
-          gpg-private-key: |+
-            -----BEGIN PGP PRIVATE KEY BLOCK-----
-
-              lIYEZSaOHRYJKwYBBAHaRw8BAQdAeUJxH/vVNKX0eelwCNTobf81v0Hj4MawLG0E
-              GVIWlej+BwMCxTlfJlgcx2jzdO/wpaTXw1WibkoQTfHPdRURkeDUzmaAE9X1ZeMs
-              CNpxtQ5g1tw/tbUNwpCcJOKTNlzL9znkHb0m+V2OomTrMxF8yrzJm7QnQ2hyaXN0
-              aWFuIFNjaG1pdHQgPHNjaG1pY2hyaUBnbWFpbC5jb20+iJkEExYKAEEWIQQkX15d
-              MeZBuDXmYP3tBwg+cWRAcQUCZSaOHQIbAwUJBaOagAULCQgHAgIiAgYVCgkICwIE
-              FgIDAQIeBwIXgAAKCRDtBwg+cWRAcZbbAP48mO0l+w8bR5el5pJu2ioArlMnjr/5
-              i9GLC0Fr9n2uWQEAqZJ2F6jgEQv0IWUb7FSE8n+2XWOgi5+gSHaH/E888gSciwRl
-              Jo4dEgorBgEEAZdVAQUBAQdAkYtMSVshl4UXxHWr3VNLQYbZLaz8/4D3nGm0W9vX
-              PzkDAQgH/gcDApjtP6b5bN7e8zuGvKfHj0iKOxDOuDy0u/qDfUBsdsFW0pBlk2no
-              Yf+mF6w1uiqJykiBepeH7i72hmpOMgXffmAgieEj/KAsiqIvud94OxiIfgQYFgoA
-              JhYhBCRfXl0x5kG4NeZg/e0HCD5xZEBxBQJlJo4dAhsMBQkFo5qAAAoJEO0HCD5x
-              ZEBxVCcA/R3iyE7Q3NaTfFYTdFVesVRnBNanOMSTjSJW1jdKHadOAQCNCG3PpS0z
-              0AbLZUqM7ronA9XfqdOv0PKgfX3BEZHzDw==
-              =LaZ1
-              -----END PGP PRIVATE KEY BLOCK-----
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
           # overwrite-settings: true
           server-id: central # Value of the distributionManagement/repository/id field of the pom.xml
