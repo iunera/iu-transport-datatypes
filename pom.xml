@@ -6,21 +6,53 @@
 	<artifactId>iu-transport-datatypes</artifactId>
 	<version>0.0.2</version>
 	<name>iu-transport-datatypes</name>
-	<description>iunera domain objects</description>
+	<description>iunera common objects for the transport domain and the fahrbar
+		project</description>
 	<packaging>jar</packaging>
+	<url>https://github.com/iunera</url>
+
 	<properties>
 
 		<!-- java11 is the max flink supported version  -->
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-		<jts.version>1.19.0</jts.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<!-- <jts.version>1.19.0</jts.version> -->
 	</properties>
+
+	<licenses>
+		<license>
+			<name>Apache-2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/iunera/iu-transport-datatypes</url>
+		<connection>scm:git:git@github.com:iunera/iu-transport-datatypes.git</connection>
+		<developerConnection>
+			scm:git:git@github.com:iunera/iu-transport-datatypes.git</developerConnection>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Tim Frey</name>
+			<email>tim.frey@iunera.com</email>
+		</developer>
+		<developer>
+			<name>Christian Schmitt</name>
+			<email>christian.schmitt@iunera.com</email>
+		</developer>
+	</developers>
+
 
 	<dependencies>
 		<dependency>
 			<groupId>org.locationtech.jts</groupId>
 			<artifactId>jts-core</artifactId>
-			<version>${jts.version}</version>
+			<!-- <version>${jts.version}</version> -->
+			<version>1.19.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -37,7 +69,6 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
@@ -52,5 +83,75 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>3.2.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>3.4.1</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<!-- Prevent gpg from using pinentry programs -->
+							<gpgArguments>
+								<arg>--pinentry-mode</arg>
+								<arg>loopback</arg>
+							</gpgArguments>
+						</configuration>
+
+					</plugin>
+
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<version>0.1.2</version>
+						<extensions>true</extensions>
+						<configuration>
+							<publishingServerId>central</publishingServerId>
+							<tokenEnabled>true</tokenEnabled>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

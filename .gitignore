@@ -25,3 +25,5 @@ replay_pid*
 .vscode/
 target/
 /.classpath
+.mvn/wrapper/**
+!.mvn/wrapper/maven-wrapper.properties
