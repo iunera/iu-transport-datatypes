@@ -7,6 +7,10 @@ package com.iunera.publictransport.domain;
 public enum EDelayPerception {
   A_EARLY, B_WITHIN_1m, C_WITHIN_5m, D_WITHIN_10m, E_WITHIN_20m, F_EXCEEDING_20m;
 
+  /**
+   * @param delayInSeconds
+   * @return
+   */
   public static EDelayPerception getDelayPerception(long delayInSeconds) {
 
     if (delayInSeconds < 0)

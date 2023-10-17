@@ -111,7 +111,7 @@ public class RideEvent implements Serializable {
   // event specific extensions
 
   /**
-   * Only in the stop event Map<DOOR, EntryExitActivity> Strings can be DOOR1..DOORn
+   * Only in the stop event {@code An annotation Map<DOOR, EntryExitActivity>`} Strings can be DOOR1..DOORn
    */
   public Map<String, EntryExitActivity> doorEntryExitActivity;
 

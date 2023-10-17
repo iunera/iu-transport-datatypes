@@ -1,5 +1,8 @@
 package com.iunera.publictransport.domain;
 
+/**
+ * 
+ */
 public enum EventType {
   /** An event that appears generally on the road */
   WAYPOINT,

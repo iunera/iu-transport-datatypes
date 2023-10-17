@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Locale;
 
 
+/**
+ * 
+ */
 public enum EDayGroup {
   WEEKEND, WEEKDAY;
 
 
-
-  // TODO: ensure all countries are added correctly:
-  // https://en.wikipedia.org/wiki/Workweek_and_weekend#Asia_and_Australasia
   private static final List<String> sunWeekendDaysCountries =
       Arrays.asList(new String[] {"GQ", "IN", "TH", "UG"});
   private static final List<String> fryWeekendDaysCountries =
@@ -25,6 +25,11 @@ public enum EDayGroup {
       Arrays.asList(new String[] {"AE", "DZ", "BH", "BD", "EG", "IQ", "IL", "JO", "KW", "LY", "MV",
           "MR", "OM", "PS", "QA", "SA", "SD", "SY", "YE"});
 
+
+  /**
+   * @param locale
+   * @return
+   */
   public static DayOfWeek[] getWeekendDays(Locale locale) {
     if (thuFryWeekendDaysCountries.contains(locale.getCountry())) {
       return new DayOfWeek[] {DayOfWeek.THURSDAY, DayOfWeek.FRIDAY};
@@ -41,6 +46,12 @@ public enum EDayGroup {
     }
   }
 
+  /**
+   * @param time
+   * @param zone
+   * @param locale
+   * @return
+   */
   public static EDayGroup getDayGroup(Instant time, ZoneId zone, Locale locale) {
     if (Arrays.asList(getWeekendDays(locale)).contains(time.atZone(zone).getDayOfWeek())) {
       return EDayGroup.WEEKEND;
