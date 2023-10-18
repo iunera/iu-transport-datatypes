@@ -41,10 +41,10 @@ jobs:
       - name: Deploy
         run: |
 
-          # ./mvnw -Prelease deploy -X
           # ./mvnw verify gpg:sign -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
           # ./mvnw deploy -Prelease -Dgpg.passphrase=${MAVEN_GPG_PASSPHRASE}
-          ./mvnw verify gpg:sign -Prelease -X -Dgpg.passphrase=${MAVEN_GPG_PASSPHRASE} 
+          # ./mvnw verify gpg:sign -Prelease -X 
+          ./mvnw -Prelease deploy -Dgpg.passphrase=${MAVEN_GPG_PASSPHRASE} 
 
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
