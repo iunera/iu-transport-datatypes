@@ -23,7 +23,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Value of the GPG private key to import
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
+          gpg-passphrase: GPG_PASSPHRASE # env variable for GPG private key passphrase
           # overwrite-settings: true
           server-id: central # Value of the distributionManagement/repository/id field of the pom.xml
           server-username: SONATYPE_USERNAME # env variable for username in deploy
@@ -35,18 +35,18 @@ jobs:
 
       #     # ./mvnw -Prelease deploy -X
       #     # ./mvnw verify gpg:sign -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
-      #     # ./mvnw deploy -Prelease -Dgpg.passphrase=${MAVEN_GPG_PASSPHRASE}
+      #     # ./mvnw deploy -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
       #     ./mvnw package
 
       - name: Deploy
         run: |
 
           # ./mvnw verify gpg:sign -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
-          # ./mvnw deploy -Prelease -Dgpg.passphrase=${MAVEN_GPG_PASSPHRASE}
+          # ./mvnw deploy -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
           # ./mvnw verify gpg:sign -Prelease -X 
-          ./mvnw -Prelease deploy -Dgpg.passphrase=${MAVEN_GPG_PASSPHRASE} 
+          ./mvnw deploy -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE} 
 
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
