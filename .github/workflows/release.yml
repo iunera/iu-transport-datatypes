@@ -24,20 +24,8 @@ jobs:
           server-password: SONATYPE_PASSWORD
           cache: maven
 
-      # - name: build
-      #   run: |
-
-      #     # ./mvnw -Prelease deploy -X
-      #     # ./mvnw verify gpg:sign -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
-      #     # ./mvnw deploy -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
-      #     ./mvnw package
-
       - name: Deploy
         run: |
-
-          # ./mvnw verify gpg:sign -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
-          # ./mvnw deploy -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE}
-          # ./mvnw verify gpg:sign -Prelease -X 
           ./mvnw deploy -Prelease -Dgpg.passphrase=${GPG_PASSPHRASE} 
 
         env:
