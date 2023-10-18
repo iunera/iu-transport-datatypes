@@ -38,18 +38,16 @@
 		<url>https://www.iunera.com/</url>
 	</organization>
 
-	<!-- 
+	
 	<developers>
 		<developer>
-			<name>Tim Frey</name>
-			<email>tim.frey@iunera.com</email>
+			<name>Tim</name>
 		</developer>
 		<developer>
-			<name>Christian Schmitt</name>
-			<email>christian.schmitt@iunera.com</email>
+			<name>Chris</name>
 		</developer>
 	</developers>
- -->
+
 
 	<dependencies>
 		<dependency>
