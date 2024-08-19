@@ -15,3 +15,5 @@ The domain objects are leaned towards https://schema.org data types and to refle
 For examples are there definitions of weekends that differ in Arabic countries to wester countries and so on (https://en.wikipedia.org/wiki/Workweek_and_weekend#Asia_and_Australasia).
 
 
+# License
+[Open Compensation Token License, Version 0.20](https://github.com/open-compensation-token-license/license/blob/main/LICENSE.md)
