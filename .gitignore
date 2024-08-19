@@ -27,3 +27,4 @@ target/
 /.classpath
 .mvn/wrapper/**
 !.mvn/wrapper/maven-wrapper.properties
+.settings/*

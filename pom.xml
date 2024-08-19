@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.iunera.fahrbar</groupId>
 	<artifactId>iu-transport-datatypes</artifactId>
-	<version>0.0.2</version>
+	<version>2.0.0</version>
 	<name>iu-transport-datatypes</name>
 	<description>iunera common objects for the transport domain and the fahrbar
 		project</description>
@@ -15,7 +15,7 @@
 		<!-- java11 is the max flink supported version  -->
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<!-- <jts.version>1.19.0</jts.version> -->
+		<jts.version>1.19.0</jts.version>
 	</properties>
 
 	<licenses>
@@ -38,7 +38,7 @@
 		<url>https://www.iunera.com/</url>
 	</organization>
 
-	
+
 	<developers>
 		<developer>
 			<name>Tim</name>
@@ -83,9 +83,58 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>2.4.0</version>
+				<configuration>
+					<licenseName>octl</licenseName>
+					<organizationName>Tim Frey, Christian Schmitt</organizationName>
+					<inceptionYear>2024</inceptionYear>
+					<licenseResolver>
+						${project.baseUri}src/license</licenseResolver>
+					<roots>
+						<root>src/main/java</root>
+						<root>src/test</root>
+					</roots>
+				</configuration>
+				<executions>
+					<execution>
+						<id>first</id>
+						<goals>
+							<goal>update-file-header</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.coveo</groupId>
+				<artifactId>fmt-maven-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<sourceDirectory>src/main/java</sourceDirectory>
+					<testSourceDirectory>src/test/java</testSourceDirectory>
+					<verbose>false</verbose>
+					<filesNamePattern>.*\.java</filesNamePattern>
+					<skip>false</skip>
+					<skipSortingImports>false</skipSortingImports>
+					<style>google</style>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.4.1</version>
+				<configuration>
+					<doclint>none</doclint>
+				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -179,7 +228,6 @@
 								<arg>loopback</arg>
 							</gpgArguments>
 						</configuration>
-
 					</plugin>
 
 					<plugin>
@@ -192,6 +240,7 @@
 							<tokenEnabled>true</tokenEnabled>
 						</configuration>
 					</plugin>
+
 
 				</plugins>
 			</build>

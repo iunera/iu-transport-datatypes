@@ -1,5 +1,32 @@
-package com.iunera.publictransport.domain;
+package com.iunera.publictransport.domain.trip;
 
+/*-
+ * #%L
+ * iu-transport-datatypes
+ * %%
+ * Copyright (C) 2024 Tim Frey, Christian Schmitt
+ * %%
+ * Licensed under the OPEN COMPENSATION TOKEN LICENSE (the "License").
+ *
+ * You may not use this file except in compliance with the License.
+ *
+ * You may obtain a copy of the License at
+ * <https://github.com/open-compensation-token-license/license/blob/main/LICENSE.md>
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @octl.sid: 1b6f7a5d-8dcf-44f1-b03a-77af04433496
+ * #L%
+ */
+
+import com.iunera.publictransport.domain.EDayGroup;
+import com.iunera.publictransport.domain.EDelayPerception;
+import com.iunera.publictransport.domain.TransportProductDTO;
+import com.iunera.publictransport.domain.route.Route;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -10,28 +37,16 @@ import java.util.Map;
  * An object representing a waypoint like a stop in a ride with KPIs to be analyzed and ready to be
  * used for forecasts
  */
-public class LineRideDetails {
+public class FilteredFlattenedTripStops {
 
-  /** The unique ID of the record */
+  /** The unique ID of the record - */
   public String eventId;
 
+  /** if known the trip id */
+  public String route_tripId;
 
-
-  // TODO new fields
-  public String softwareVersion; // Basisversion_Nr
-  public String route_circulationNo;
-  public String route_courseId;
-  // TODO: the unique id of the trip
-  // -- trip id- that is the circulation number or so so the unique key for that - maybe daily ride
-  // key plus the start time of the trip origin to generate it naturally
-
-  public String route_journeyId;
-  public String route; // Linienfahrweg_Nr
+  public String routeId; // Linienfahrweg_Nr
   public String stop_id;
-  public String stopAbbreviation;
-  public String stopPoint; // Haltepunkt_Nr
-  public long currentOdometerValue; // Km_Stand
-
 
   // STOP
   public Double latitude;
@@ -39,46 +54,38 @@ public class LineRideDetails {
   public Double stop_planned_latitude;
   public Double stop_planned_longitude;
 
-  public String[] stop_geoKeys;
+  // public String[] stop_geoKeys;
 
   public String stop_label;
-  /**
-   * The planned platform where the vehicle was planned to stop - the real platform where it stopped
-   * can be different
-   */
-  public String stop_plannedPlatform;
-  /** The Platform where the vehicle stopped */
-  public String stop_realPlatform;
+  /*The planned platform where the vehicle was planned to stop - the real platform where it stopped can be different*/
+  // public String stop_plannedPlatform;
+  /*The Platform where the vehicle stopped*/
+  // public String stop_realPlatform;
   /** isSchoolOrUniversity, Mainstation */
   public String stop_function;
-  public EStopType stop_type;
-
+  // public EStopType stop_type;
 
   /** Line - the unique id of the line unique even for different transport products */
-  public String line_name;
+  public String route_name;
 
-  /**
-   * The georegionkeys of the line - a line can have multiple geyokey as they can be expressed in
-   * different precision levels
-   */
-  public String[] line_geoKeys;
+  /*The georegionkeys of the line - a line can have multiple geyokey as they can be expressed in different precision levels*/
+  // public String[] line_geoKeys;
 
-  public String line_label;
+  public String route_label;
   public TransportProductDTO line_transportProduct;
-  public String line_direction;
+  // public String route_direction;
 
-  /** the bundle or network of lines - used */
-  public String line_GroupId;
-  public String line_Group;
-  /** The administrative state where the line bundle operates */
-  public String line_GroupState;
+  /* the bundle or network of lines - used */
+  // public String line_GroupId;
+  // public String line_Group;
+  /*The administrative state where the line bundle operates*/
+  // public String line_GroupState;
 
-
-  public Line2 line;
+  public Route routeDetails;
 
   // time
-  public Instant time_arrivalPlan;
-  public Instant time_arrivalReal;
+  // public Instant time_arrivalPlan;
+  // public Instant time_arrivalReal;
   public Instant time_departurePlan;
   public Instant time_departureReal;
   /**
@@ -86,7 +93,6 @@ public class LineRideDetails {
    * day together
    */
   public LocalDate time_OperationDate;
-
 
   /**
    * The hour of the day for simplified queries. Can be used as query for hourly histograms, easily.
@@ -119,34 +125,13 @@ public class LineRideDetails {
   /** Combined if schools are open - so no weekends, no corona school closing, holidays */
   public Boolean dayMeta_areSchoolsOpen;
 
-  /* Pre post and in corona */
-  public String pandemic;
-  public String pandemic_schools;
-  // if there is a "lockdown" and the intensity of the restrictions
-  public Boolean pandemic_lockdown;
-  /** The detailed restrictions */
-  public List<String> pandemic_restrictions;
-
-
-
   // vehicle
   public String vehicle_id;
   public String vehicle_licencePlate;
 
-  /** The section in the vehicle like a part of a train which is not accessible by walking */
-  // TODO -discuss public String vehicle_section;
-
-  /** The carriage or the part of a bus */
-  // TODO -discuss public String vehicle_carriage;
-
-  /** the section in a carriage like upper or lower deck */
-  // TODO -discuss public String vehicle_carriage_section;
-
-  /** the class of the vehicle or in the carriage */
-  // TODO -discuss public String vehicle_class;
-
   /** the total standing passengers in the vehicle */
   public Integer vehicle_seats;
+
   public Integer vehicle_possibleStandingPassengers;
 
   // the operator driving the vehicle
@@ -167,11 +152,13 @@ public class LineRideDetails {
   public Double i_exits;
   /** How occupied did the vehicle arrive */
   public Double i_occupationArrival;
+
   public Double i_occupationDeparture;
   /** How long the ride took till the next stop - measure value not statistically */
   public Long i_timeTillNextStop;
   /** How long the ride took till the next stop - measure value not statistically */
   public Long i_timeFromLastStop;
+
   public Double i_origin_routeDistanceToLastStop;
 
   public String origin_stop_positionNaturalKey;
@@ -186,10 +173,6 @@ public class LineRideDetails {
   // the beginning stop of a line
   public boolean startStop;
 
-  // the next station details
-  public Double i_destination_entries;
-  public Double i_destination_exists;
-  public Double i_destination_retainers;
   /** entries plus exists - how much do the passengers change here */
   public Double i_absPassengerChange;
   /** The absolute growth or passengers or - "minus" values for decrease */
@@ -202,10 +185,8 @@ public class LineRideDetails {
   public Double i_origin_exists;
   public Double i_origin_retainers;
 
-  public Double i_destination_routeDistanceToNextStop;
+  public Double i_origin_routeDistanceTolastStop;
   // END FOUNDATION what has to be here before any processing
-
-
 
   /** real departure - real arrival */
   public Long i_totalStopDuration;
@@ -216,7 +197,6 @@ public class LineRideDetails {
   /** The "real departure"- "planned departure" */
   public Long i_departureDelay;
 
-
   /**
    * If the departure is delayed - On time = up to 5 minutes - Acceptable delay = 6 to 10 minutes -
    * Unacceptable delay = longer than 10 minutes
@@ -225,27 +205,17 @@ public class LineRideDetails {
   /** if the arrival is delayed */
   public EDelayPerception perception_arrivalDelay;
 
-
-
-  /** Stop duration/entries */
-  public Double i_entranceSpeed;
-  /** Stop duration/exits */
-  public Double i_exitSpeed;
-
-
-
   // route data
   /** The delay when the route started */
   public Long i_route_startDelay;
+
   public Instant route_time_startPlanned;
   public Instant route_time_startReal;
   public Boolean route_startIsDelayed;
 
   /** if the date comes form a second data source and multiple records attribute the same fact */
   public String[] meta_alternateSources;
-  /**
-   * Manual counting, technical measurements or however the data was generated.
-   */
+  /** Manual counting, technical measurements or however the data was generated. */
   public String meta_dataOrigin;
 
   /**
