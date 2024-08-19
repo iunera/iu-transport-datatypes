@@ -24,7 +24,7 @@ hs_err_pid*
 replay_pid*
 .vscode/
 target/
-/.classpath
+.classpath
 .mvn/wrapper/**
 !.mvn/wrapper/maven-wrapper.properties
 .settings/*
